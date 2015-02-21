@@ -1,13 +1,13 @@
 package com.msse.seth.contactviewer;
 
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.TextView;
 
-public class ContactDetail extends ActionBarActivity {
+public class ContactDetail extends Activity {
     public final static String CURRENT_CONTACT = "ContactDetail.CurrentContact";
 
     @Override
@@ -47,7 +47,7 @@ public class ContactDetail extends ActionBarActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_delete) {
             return true;
         }
 
