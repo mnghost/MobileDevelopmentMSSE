@@ -2,6 +2,7 @@ package com.msse.seth.contactviewer;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,7 +28,11 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Contact contact = (Contact)getListAdapter().getItem(position);
-        Toast.makeText(this,"Clicked " + contact.getName() + " (" + id + ")", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"Clicked " + contact.getName() + " (" + id + ")", Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, ContactDetail.class);
+        intent.putExtra(ContactDetail.CURRENT_CONTACT, contact);
+        startActivity(intent);
 
     }
 
