@@ -42,7 +42,7 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
- Built application files
+# Built application files
 *.apk
 *.ap_
 # Files for the Dalvik VM
@@ -62,3 +62,6 @@ local.properties
 proguard/
 # Log Files
 *.log
+
+# IntelliJ/ Android Studio folder
+*/.idea/
