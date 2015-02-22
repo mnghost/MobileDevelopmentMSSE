@@ -7,17 +7,24 @@ import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.TextView;
 
-public class ContactDetail extends Activity {
-    public final static String CURRENT_CONTACT = "ContactDetail.CurrentContact";
+import java.util.UUID;
 
+public class ContactDetail extends Activity {
+    public final static String CURRENT_CONTACT_ID = "ContactDetail.CurrentContactId";
+    private ContactManager _contactManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        _contactManager = ContactManager.getInstance();
+
         Intent intent = getIntent();
-        Contact contact = intent.getParcelableExtra(CURRENT_CONTACT);
+
+        UUID contactId = UUID.fromString(intent.getStringExtra(CURRENT_CONTACT_ID));
+        Contact contact = _contactManager.getContact(contactId);
 
         setContentView(R.layout.activity_contact_detail);
+
         TextView nameView = (TextView)findViewById(R.id.contact_detail_name);
         TextView phoneView = (TextView)findViewById(R.id.contact_detail_phone);
         TextView emailView = (TextView)findViewById(R.id.contact_detail_email);

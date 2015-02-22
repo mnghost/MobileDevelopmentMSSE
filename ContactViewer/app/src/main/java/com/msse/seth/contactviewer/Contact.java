@@ -3,31 +3,12 @@ package com.msse.seth.contactviewer;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.UUID;
+
 /**
  * Created by Seth on 2/13/2015.
  */
-public class Contact implements Parcelable {
-
-    public static Contact[] getAll() {
-        return new Contact[] {
-                new Contact("Malcom Reynolds", "Captain", "555-1234", "email@email.com", "@iamtwitter"),
-                new Contact("Jayne Cobb", "Muscle", "555-6374", "email@email.com", "@iamtwitter"),
-                new Contact("Wash", "Pilot", "555-7263", "email@email.com", "@iamtwitter"),
-                new Contact("Kaylee", "Engineer", "555-0987", "email@email.com", "@iamtwitter"),
-                new Contact("Malcom Reynolds", "Captain", "555-1234", "email@email.com", "@iamtwitter"),
-                new Contact("Jayne Cobb", "Muscle", "555-6374", "email@email.com", "@iamtwitter"),
-                new Contact("Wash", "Pilot", "555-7263", "email@email.com", "@iamtwitter"),
-                new Contact("Kaylee", "Engineer", "555-0987", "email@email.com", "@iamtwitter"),
-                new Contact("Malcom Reynolds", "Captain", "555-1234", "email@email.com", "@iamtwitter"),
-                new Contact("Jayne Cobb", "Muscle", "555-6374", "email@email.com", "@iamtwitter"),
-                new Contact("Wash", "Pilot", "555-7263", "email@email.com", "@iamtwitter"),
-                new Contact("Kaylee", "Engineer", "555-0987", "email@email.com", "@iamtwitter"),
-                new Contact("Malcom Reynolds", "Captain", "555-1234", "email@email.com", "@iamtwitter"),
-                new Contact("Jayne Cobb", "Muscle", "555-6374", "email@email.com", "@iamtwitter"),
-                new Contact("Wash", "Pilot", "555-7263", "email@email.com", "@iamtwitter"),
-                new Contact("Kaylee", "Engineer", "555-0987", "email@email.com", "@iamtwitter")
-        };
-    }
+public class Contact{
 
     public Contact(String name, String title, String phone, String email, String twitterID) {
         this.name = name;
@@ -37,11 +18,19 @@ public class Contact implements Parcelable {
         this.twitterID = twitterID;
     }
 
+
     private String name;
     private String title;
     private String email;
     private String phone;
     private String twitterID;
+
+
+    private UUID id;
+
+    public UUID getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
@@ -83,40 +72,10 @@ public class Contact implements Parcelable {
         this.twitterID = twitterID;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(title);
-        dest.writeString(email);
-        dest.writeString(phone);
-        dest.writeString(twitterID);
-    }
 
-    public Contact(Parcel parcel) {
-        readFromParcel(parcel);
-    }
 
-    private void readFromParcel(Parcel parcel)
-    {
-        this.name = parcel.readString();
-        this.title = parcel.readString();
-        this.email = parcel.readString();
-        this.phone = parcel.readString();
-        this.twitterID = parcel.readString();
-    }
-
-//boiler plate code from http://shri.blog.kraya.co.uk/2010/04/26/android-parcel-data-to-pass-between-activities-using-parcelable-classes/
-    public static final Parcelable.Creator CREATOR = new Parcelable.Creator()
-    {
-        public Contact createFromParcel(Parcel in)
-        { return new Contact(in); }
-
-        public Contact[] newArray(int size)
-        { return new Contact[size]; }
-    };
 }

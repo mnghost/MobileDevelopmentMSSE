@@ -16,13 +16,15 @@ import android.widget.Toast;
 
 
 public class MainActivity extends ListActivity {
+    ContactManager _contactManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        setListAdapter(new ContactAdapter(this, R.layout.contact_item, Contact.getAll()));
+        _contactManager = ContactManager.getInstance();
+        _contactManager.loadContacts(this);
+        setListAdapter(new ContactAdapter(this, R.layout.contact_item, _contactManager.getAllContacts()));
     }
 
     @Override
@@ -31,9 +33,16 @@ public class MainActivity extends ListActivity {
         //Toast.makeText(this,"Clicked " + contact.getName() + " (" + id + ")", Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, ContactDetail.class);
-        intent.putExtra(ContactDetail.CURRENT_CONTACT, contact);
+        intent.putExtra(ContactDetail.CURRENT_CONTACT_ID, contact.getId().toString());
         startActivity(intent);
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        _contactManager.saveContacts(this);
     }
 
     @Override
