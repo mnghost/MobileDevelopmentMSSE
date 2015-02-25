@@ -26,16 +26,20 @@ import com.google.gson.reflect.TypeToken;
  */
 public class ContactManager {
 
-    private static ContactManager ourInstance = new ContactManager();
+    private static ContactManager ourInstance;
 
     public static ContactManager getInstance() {
+        if(ourInstance == null) {
+            ourInstance = new ContactManager();
+        }
+
         return ourInstance;
     }
 
     private final String _contactFileName = "contacts_storage";
     Map<UUID, Contact> _contacts;
 
-    public ContactManager() {
+    private ContactManager() {
 
     }
 
