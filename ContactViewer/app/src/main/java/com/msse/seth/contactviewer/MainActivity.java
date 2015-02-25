@@ -73,6 +73,9 @@ public class MainActivity extends ListActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_new_contact) {
+            Intent editIntent = new Intent(MainActivity.this, EditContactActivity.class);
+            //editIntent.putExtra(ContactDetail.CURRENT_CONTACT_ID, null);
+            startActivity(editIntent);
             return true;
         }
 
