@@ -15,6 +15,15 @@ public class ContactDetail extends Activity {
     public final static String CURRENT_CONTACT_ID = "ContactDetail.CurrentContactId";
     private ContactManager _contactManager;
     private Contact _contact;
+
+    private UUID _contactId;
+
+    TextView _nameView;
+    TextView _phoneView;
+    TextView _emailView;
+    TextView _titleView;
+    TextView _twitterView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,25 +32,36 @@ public class ContactDetail extends Activity {
 
         Intent intent = getIntent();
 
-        UUID contactId = UUID.fromString(intent.getStringExtra(CURRENT_CONTACT_ID));
-        _contact = _contactManager.getContact(contactId);
+        _contactId = UUID.fromString(intent.getStringExtra(CURRENT_CONTACT_ID));
 
         setContentView(R.layout.activity_contact_detail);
 
-        TextView nameView = (TextView)findViewById(R.id.contact_detail_name);
-        TextView phoneView = (TextView)findViewById(R.id.contact_detail_phone);
-        TextView emailView = (TextView)findViewById(R.id.contact_detail_email);
-        TextView titleView = (TextView)findViewById(R.id.contact_detail_title);
-        TextView twitterView = (TextView)findViewById(R.id.contact_detail_twitter);
-
-        nameView.setText(_contact.getName());
-        phoneView.setText(_contact.getPhone());
-        emailView.setText(_contact.getEmail());
-        titleView.setText(_contact.getTitle());
-        twitterView.setText(_contact.getTwitterID());
+        populateContactDetails(_contactId);
 
     }
 
+    public void populateContactDetails(UUID contactId){
+
+        _contact = _contactManager.getContact(contactId);
+        _nameView = (TextView)findViewById(R.id.contact_detail_name);
+        _phoneView = (TextView)findViewById(R.id.contact_detail_phone);
+        _emailView = (TextView)findViewById(R.id.contact_detail_email);
+        _titleView = (TextView)findViewById(R.id.contact_detail_title);
+        _twitterView = (TextView)findViewById(R.id.contact_detail_twitter);
+
+        _nameView.setText(_contact.getName());
+        _phoneView.setText(_contact.getPhone());
+        _emailView.setText(_contact.getEmail());
+        _titleView.setText(_contact.getTitle());
+        _twitterView.setText(_contact.getTwitterID());
+    }
+
+    @Override
+    public void onResume()
+    {  // After a pause OR at startup
+        super.onResume();
+        populateContactDetails(_contactId);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
