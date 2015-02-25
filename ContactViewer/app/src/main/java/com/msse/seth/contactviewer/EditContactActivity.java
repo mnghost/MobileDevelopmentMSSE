@@ -3,6 +3,7 @@ package com.msse.seth.contactviewer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.UUID;
@@ -18,24 +19,24 @@ public class EditContactActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        Intent intent = getIntent();
-//
-//        UUID contactId = UUID.fromString(intent.getStringExtra(ContactDetail.CURRENT_CONTACT_ID));
-//
-//        Contact contact = _contactManager.getContact(contactId);
-//
+        Intent intent = getIntent();
+
+        UUID contactId = UUID.fromString(intent.getStringExtra(ContactDetail.CURRENT_CONTACT_ID));
+        _contactManager = ContactManager.getInstance();
+        Contact contact = _contactManager.getContact(contactId);
+
         setContentView(R.layout.activity_edit_contact);
-//
-//        TextView nameView = (TextView)findViewById(R.id.contact_detail_name);
-//        TextView phoneView = (TextView)findViewById(R.id.contact_detail_phone);
-//        TextView emailView = (TextView)findViewById(R.id.contact_detail_email);
-//        TextView titleView = (TextView)findViewById(R.id.contact_detail_title);
-//        TextView twitterView = (TextView)findViewById(R.id.contact_detail_twitter);
-//
-//        nameView.setText(contact.getName());
-//        phoneView.setText(contact.getPhone());
-//        emailView.setText(contact.getEmail());
-//        titleView.setText(contact.getTitle());
-//        twitterView.setText(contact.getTwitterID());
+
+        EditText nameView = (EditText)findViewById(R.id.editName);
+        EditText phoneView = (EditText)findViewById(R.id.editPhone);
+        EditText emailView = (EditText)findViewById(R.id.editEmail);
+        EditText titleView = (EditText)findViewById(R.id.editTitle);
+        EditText twitterView = (EditText)findViewById(R.id.editTwitter);
+
+        nameView.setText(contact.getName());
+        phoneView.setText(contact.getPhone());
+        emailView.setText(contact.getEmail());
+        titleView.setText(contact.getTitle());
+        twitterView.setText(contact.getTwitterID());
     }
 }
