@@ -83,7 +83,7 @@ public class ContactManager {
     }
 
     public void deleteContact(Contact contact) {
-
+        _contacts.remove(contact.getId());
     }
 
     public void saveContacts(Context context) {
