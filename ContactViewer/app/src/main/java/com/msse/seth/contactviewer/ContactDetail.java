@@ -14,6 +14,7 @@ import java.util.UUID;
 public class ContactDetail extends Activity {
     public final static String CURRENT_CONTACT_ID = "ContactDetail.CurrentContactId";
     private ContactManager _contactManager;
+    private Contact _contact;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,7 @@ public class ContactDetail extends Activity {
         Intent intent = getIntent();
 
         UUID contactId = UUID.fromString(intent.getStringExtra(CURRENT_CONTACT_ID));
-        final Contact contact = _contactManager.getContact(contactId);
+        _contact = _contactManager.getContact(contactId);
 
         setContentView(R.layout.activity_contact_detail);
 
@@ -33,18 +34,18 @@ public class ContactDetail extends Activity {
         TextView titleView = (TextView)findViewById(R.id.contact_detail_title);
         TextView twitterView = (TextView)findViewById(R.id.contact_detail_twitter);
 
-        nameView.setText(contact.getName());
-        phoneView.setText(contact.getPhone());
-        emailView.setText(contact.getEmail());
-        titleView.setText(contact.getTitle());
-        twitterView.setText(contact.getTwitterID());
+        nameView.setText(_contact.getName());
+        phoneView.setText(_contact.getPhone());
+        emailView.setText(_contact.getEmail());
+        titleView.setText(_contact.getTitle());
+        twitterView.setText(_contact.getTwitterID());
 
         final Button editButton = (Button)findViewById(R.id.editButton);
 
         editButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent editIntent = new Intent(ContactDetail.this, EditContactActivity.class);
-                editIntent.putExtra(ContactDetail.CURRENT_CONTACT_ID, contact.getId().toString());
+                editIntent.putExtra(ContactDetail.CURRENT_CONTACT_ID, _contact.getId().toString());
                 startActivity(editIntent);
             }
         });
@@ -67,7 +68,8 @@ public class ContactDetail extends Activity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_delete) {
-            return true;
+            _contactManager.deleteContact(_contact);
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

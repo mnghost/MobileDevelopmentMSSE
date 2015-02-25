@@ -24,7 +24,19 @@ public class MainActivity extends ListActivity {
         setContentView(R.layout.activity_main);
         _contactManager = ContactManager.getInstance();
         _contactManager.loadContacts(this);
+
+        updateContacts();
+    }
+
+    private void updateContacts() {
         setListAdapter(new ContactAdapter(this, R.layout.contact_item, _contactManager.getAllContacts()));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        updateContacts();
     }
 
     @Override
