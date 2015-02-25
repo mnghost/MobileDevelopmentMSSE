@@ -63,5 +63,6 @@ proguard/
 # Log Files
 *.log
 
-# IntelliJ/ Android Studio folder
+# IntelliJ/ Android Studio stuff
 */.idea/
+*.iml

@@ -40,15 +40,6 @@ public class ContactDetail extends Activity {
         titleView.setText(_contact.getTitle());
         twitterView.setText(_contact.getTwitterID());
 
-        final Button editButton = (Button)findViewById(R.id.editButton);
-
-        editButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent editIntent = new Intent(ContactDetail.this, EditContactActivity.class);
-                editIntent.putExtra(ContactDetail.CURRENT_CONTACT_ID, _contact.getId().toString());
-                startActivity(editIntent);
-            }
-        });
     }
 
 
@@ -69,8 +60,14 @@ public class ContactDetail extends Activity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_delete) {
             _contactManager.deleteContact(_contact);
+            _contactManager.saveContacts(this);
             finish();
+        }else if(id == R.id.action_edit) {
+            Intent editIntent = new Intent(ContactDetail.this, EditContactActivity.class);
+            editIntent.putExtra(ContactDetail.CURRENT_CONTACT_ID, _contact.getId().toString());
+            startActivity(editIntent);
         }
+
 
         return super.onOptionsItemSelected(item);
     }
