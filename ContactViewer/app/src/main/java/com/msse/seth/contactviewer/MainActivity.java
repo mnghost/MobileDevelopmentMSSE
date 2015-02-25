@@ -76,7 +76,6 @@ public class MainActivity extends ListActivity {
             Intent editIntent = new Intent(MainActivity.this, EditContactActivity.class);
             //editIntent.putExtra(ContactDetail.CURRENT_CONTACT_ID, null);
             startActivity(editIntent);
-            return true;
         }
 
         return super.onOptionsItemSelected(item);
