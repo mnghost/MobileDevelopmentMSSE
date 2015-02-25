@@ -76,6 +76,6 @@ public class Contact{
         this.id = id;
     }
 
-
+    public void foo() {  return;};
 
 }
