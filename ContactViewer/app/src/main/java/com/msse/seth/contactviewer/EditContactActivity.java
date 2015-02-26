@@ -83,8 +83,8 @@ public class EditContactActivity extends Activity {
                 }
                 else {
 
-                    _contact = new Contact(_nameView.getText().toString(), _phoneView.getText().toString(), _emailView.getText().toString(),
-                            _titleView.getText().toString(),_twitterView.getText().toString());
+                    _contact = new Contact(_nameView.getText().toString(), _titleView.getText().toString(), _phoneView.getText().toString(),
+                            _emailView.getText().toString(),_twitterView.getText().toString());
                     _contactManager.addContact(_contact);
                 }
                 _contactManager.saveContacts(v.getContext());
