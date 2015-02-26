@@ -109,7 +109,7 @@ public class ContactManager {
     public void loadContacts(Context context) {
         File file = context.getFileStreamPath(_contactFileName);
         StringBuffer jsonBuffer = new StringBuffer("");
-        if (file.exists()) {
+        if (file.exists() && file.length() > 0) {
             FileInputStream fis = null;
             try {
                 FileInputStream fIn = context.openFileInput(_contactFileName) ;
